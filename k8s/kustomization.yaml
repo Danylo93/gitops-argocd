@@ -7,6 +7,6 @@ resources:
 
 images:
 - name: goserver
-  newName: dan1993/gitops-argocd
-  newTag: fd4d41b5795f79e3565dcbde7ac91f4854d8dbbb
+  newName: dan1993/gitopsfc
+  newTag: latest
 
