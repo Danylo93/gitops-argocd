@@ -2,7 +2,7 @@ name: CDGitops
 
 on: 
   push:
-    branches: [main]
+    branches: [develop]
 
 jobs:
   build:
