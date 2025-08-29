@@ -31,7 +31,7 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
         cd k8s
-        kustomize edit set image goserver=$DOCKER_USERNAME/gitops-argocd:$GITHUB_SHA
+        kustomize edit set image goserver=$DOCKER_USERNAME/dan1993:$GITHUB_SHA
 
     - name: Commit
       run: |
