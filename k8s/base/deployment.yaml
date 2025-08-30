@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: freelas-api
+  labels: { app: freelas-api }
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: freelas-api } }
+  template:
+    metadata: { labels: { app: freelas-api } }
+    spec:
+      containers:
+        - name: api
+          image: freelas-api   # <- kustomize 'set image' casa por name
+          ports: [{ containerPort: 3000 }]
