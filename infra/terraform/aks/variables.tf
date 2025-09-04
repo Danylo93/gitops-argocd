@@ -81,10 +81,46 @@ variable "rancher_vm_size" {
   default     = "Standard_DS2_v2"
 }
 
+variable "create_kafka_node_pool" {
+  description = "Create dedicated AKS node pool for Kafka"
+  type        = bool
+  default     = false
+}
+
+variable "kafka_node_pool_name" {
+  description = "Node pool name for Kafka"
+  type        = string
+  default     = "kafka"
+}
+
+variable "kafka_node_count" {
+  description = "Node count for Kafka node pool"
+  type        = number
+  default     = 2
+}
+
+variable "kafka_vm_size" {
+  description = "VM size for Kafka node pool"
+  type        = string
+  default     = "Standard_DS3_v2"
+}
+
+variable "kafka_node_labels" {
+  description = "Node labels for Kafka node pool"
+  type        = map(string)
+  default     = { workload = "kafka" }
+}
+
+variable "kafka_node_taints" {
+  description = "Node taints for Kafka node pool"
+  type        = list(string)
+  default     = ["workload=kafka:NoSchedule"]
+}
+
 variable "argocd_app_repo_url" {
   description = "Git repo URL usado pelos Applications do ArgoCD"
   type        = string
-  default     = "https://github.com/OWNER/REPO.git"
+  default     = "https://github.com/Danylo93/gitops-argocd.git"
 }
 
 variable "argocd_app_target_revision" {
@@ -92,3 +128,5 @@ variable "argocd_app_target_revision" {
   type        = string
   default     = "main"
 }
+
+

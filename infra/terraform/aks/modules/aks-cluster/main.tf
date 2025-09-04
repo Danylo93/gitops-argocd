@@ -25,3 +25,16 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   tags = var.tags
 }
+
+resource "azurerm_kubernetes_cluster_node_pool" "kafka" {
+  count                 = var.create_kafka_node_pool ? 1 : 0
+  name                  = var.kafka_node_pool_name
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.aks.id
+  vm_size               = var.kafka_vm_size
+  node_count            = var.kafka_node_count
+  mode                  = "User"
+  orchestrator_version  = var.kubernetes_version
+  node_labels           = var.kafka_node_labels
+  node_taints           = var.kafka_node_taints
+  tags                  = var.tags
+}

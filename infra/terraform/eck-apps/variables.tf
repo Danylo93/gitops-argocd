@@ -21,3 +21,20 @@ variable "argocd_app_target_revision" {
   default     = "main"
 }
 
+variable "strimzi_namespace" {
+  description = "Namespace onde o Strimzi Operator será instalado"
+  type        = string
+  default     = "strimzi-system"
+}
+
+variable "kafka_namespace" {
+  description = "Namespace do cluster Kafka (CR)"
+  type        = string
+  default     = "kafka"
+}
+
+variable "strimzi_chart_version" {
+  description = "Versão do chart Helm do Strimzi Operator"
+  type        = string
+  default     = "0.41.0"
+}

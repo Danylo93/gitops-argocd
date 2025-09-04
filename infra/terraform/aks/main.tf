@@ -6,6 +6,12 @@ module "argocd" {
   kubernetes_version = var.kubernetes_version
   node_count         = var.argocd_node_count
   vm_size            = var.argocd_vm_size
+  create_kafka_node_pool = var.create_kafka_node_pool
+  kafka_node_pool_name   = var.kafka_node_pool_name
+  kafka_node_count       = var.kafka_node_count
+  kafka_vm_size          = var.kafka_vm_size
+  kafka_node_labels      = var.kafka_node_labels
+  kafka_node_taints      = var.kafka_node_taints
   tags = {
     "managed-by" = "terraform"
     "stack"      = "argocd"

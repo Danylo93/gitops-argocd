@@ -27,7 +27,7 @@ Acesso rápido
 - Elasticsearch: `kubectl -n elastic port-forward svc/es-quickstart-es-http 9200:9200`
 - Kibana: `kubectl -n elastic port-forward svc/kibana-kb-http 5601:5601`
 
-Observações
+Observa��es
 
 - O Operator usa CRDs e manifests oficiais da Elastic referenciados no repo (Kustomize).
 - Ajuste as versões em `k8s/eck/operator/kustomization.yaml` e `k8s/eck/stack/*` conforme necessário.

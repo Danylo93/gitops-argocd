@@ -1,0 +1,54 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: kafka-cluster
+spec:
+  kafka:
+    version: 3.6.1
+    replicas: 3
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+    storage:
+      type: persistent-claim
+      size: 50Gi
+      deleteClaim: false
+    template:
+      pod:
+        nodeSelector:
+          workload: kafka
+        tolerations:
+          - key: "workload"
+            operator: "Equal"
+            value: "kafka"
+            effect: "NoSchedule"
+  zookeeper:
+    replicas: 3
+    storage:
+      type: persistent-claim
+      size: 20Gi
+      deleteClaim: false
+    template:
+      pod:
+        nodeSelector:
+          workload: kafka
+        tolerations:
+          - key: "workload"
+            operator: "Equal"
+            value: "kafka"
+            effect: "NoSchedule"
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
+    template:
+      pod:
+        nodeSelector:
+          workload: kafka
+        tolerations:
+          - key: "workload"
+            operator: "Equal"
+            value: "kafka"
+            effect: "NoSchedule"
+

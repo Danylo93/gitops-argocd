@@ -37,3 +37,38 @@ variable "tags" {
   default     = {}
 }
 
+variable "create_kafka_node_pool" {
+  description = "Create dedicated node pool for Kafka"
+  type        = bool
+  default     = false
+}
+
+variable "kafka_node_pool_name" {
+  description = "Name of the Kafka node pool"
+  type        = string
+  default     = "kafka"
+}
+
+variable "kafka_node_count" {
+  description = "Node count for Kafka node pool"
+  type        = number
+  default     = 2
+}
+
+variable "kafka_vm_size" {
+  description = "VM size for Kafka node pool"
+  type        = string
+  default     = "Standard_DS3_v2"
+}
+
+variable "kafka_node_labels" {
+  description = "Node labels for Kafka node pool"
+  type        = map(string)
+  default     = { workload = "kafka" }
+}
+
+variable "kafka_node_taints" {
+  description = "Node taints for Kafka node pool"
+  type        = list(string)
+  default     = ["workload=kafka:NoSchedule"]
+}
