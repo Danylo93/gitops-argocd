@@ -2,7 +2,7 @@ name: CDGitops
 
 on: 
   push:
-    branches: [develop]
+    branches: [main]
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ${{ secrets.DOCKER_USERNAME }}/dan1993
+        repository: ${{ secrets.DOCKER_USERNAME }}/goserver
         tags: ${{ github.sha }}, latest
 
     - name: Setup Kustomize
@@ -31,7 +31,7 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       run: |
         cd k8s
-        kustomize edit set image goserver=$DOCKER_USERNAME/gitops-argocd:$GITHUB_SHA
+        kustomize edit set image goserver=$DOCKER_USERNAME/goserver:$GITHUB_SHA
 
     - name: Commit
       run: |

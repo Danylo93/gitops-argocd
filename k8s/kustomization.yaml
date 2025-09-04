@@ -7,5 +7,5 @@ resources:
 
 images:
 - name: goserver
-  newName: dan1993/dan1993
+  newName: dan1993/goserver
   newTag: 22ef94c8b8f0779e1125511ebe451a03c491805a
