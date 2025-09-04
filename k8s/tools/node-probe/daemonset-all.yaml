@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-probe-all
+  labels:
+    app: node-probe
+spec:
+  selector:
+    matchLabels:
+      app: node-probe
+      scope: all
+  template:
+    metadata:
+      labels:
+        app: node-probe
+        scope: all
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: probe
+          image: busybox:1.36.1
+          command: ["sh","-c","while true; do sleep 300; done"]
+          resources:
+            requests:
+              cpu: 5m
+              memory: 16Mi
+            limits:
+              cpu: 20m
+              memory: 32Mi
+

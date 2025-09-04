@@ -1,0 +1,6 @@
+namespace: infra
+resources:
+  - namespace.yaml
+  - daemonset-all.yaml
+  - daemonset-kafka.yaml
+
