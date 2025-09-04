@@ -39,3 +39,6 @@ terraform apply -var argocd_app_repo_url="https://github.com/Danylo93/gitops-arg
 
 
 kubectl -n argocd get applications.argoproj.io eck-operator eck-stack
+
+kubectl -n elastic port-forward svc/es-quickstart-es-http 9200:9200
+kubectl -n elastic port-forward svc/kibana-kb-http 5601:5601
