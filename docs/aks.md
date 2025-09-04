@@ -31,3 +31,5 @@ Proxy
 - Linux/WSL: `export HTTPS_PROXY=...; export HTTP_PROXY=...`
 - PowerShell: `$env:HTTPS_PROXY="..."; $env:HTTP_PROXY="..."`
 
+
+terraform apply -var prefix="myorg" -var create_kafka_node_pool=true -var kafka_node_count=3 -var kafka_vm_size="standard_a2_v2" -var install_argocd=false

@@ -78,7 +78,7 @@ variable "rancher_node_count" {
 variable "rancher_vm_size" {
   description = "VM size for Rancher cluster node pool"
   type        = string
-  default     = "Standard_DS2_v2"
+  default     = "standard_a2_v2"
 }
 
 variable "create_kafka_node_pool" {
@@ -102,7 +102,7 @@ variable "kafka_node_count" {
 variable "kafka_vm_size" {
   description = "VM size for Kafka node pool"
   type        = string
-  default     = "Standard_DS3_v2"
+  default     = "standard_a2_v2"
 }
 
 variable "kafka_node_labels" {
