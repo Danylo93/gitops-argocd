@@ -195,7 +195,7 @@ variable "rancher_chart_version" {
 variable "create_env_clusters" {
   description = "Criar clusters AKS para Hub/Dev/HMG/PRD"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "hub_name" {
@@ -217,9 +217,9 @@ variable "hmg_name" {
 }
 
 variable "prd_name" {
-  description = "Nome do PRD (Argard)"
+  description = "Nome do PRD (Asgard)"
   type        = string
-  default     = "argard"
+  default     = "asgard"
 }
 
 variable "env_node_count" {
@@ -244,7 +244,7 @@ variable "enable_hub" {
 variable "enable_dev" {
   description = "Criar cluster Dev (Gondor)"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "enable_hmg" {
@@ -254,7 +254,7 @@ variable "enable_hmg" {
 }
 
 variable "enable_prd" {
-  description = "Criar cluster PRD (Argard)"
+  description = "Criar cluster PRD (Asgard)"
   type        = bool
   default     = false
 }

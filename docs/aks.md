@@ -46,10 +46,9 @@ TLS/Let's Encrypt
 
 Hub/Spoke (Múltiplos clusters)
 
-- Este repositório cria 4 clusters opcionais no padrão Hub/Spoke:
-  - Hub: `wakanda`, Dev: `gondor`, HMG: `sokovia`, PRD: `argard`.
-- Free tier: desabilitado por padrão. Crie/ligue apenas 1 ambiente por vez:
-  - `-var create_env_clusters=true -var enable_hub=true -var enable_dev=false -var enable_hmg=false -var enable_prd=false -var env_node_count=1 -var env_vm_size=Standard_B2s`
+- Este repositório cria 4 clusters opcionais no padrão Hub/Spoke (apenas Dev/Gondor habilitado por enquanto):
+  - Hub: `wakanda`, Dev: `gondor`, HMG: `sokovia`, PRD: `asgard`.
+- Free tier: desabilitado por padrão. Crie/ligue apenas 1 ambiente por vez.
 - Observação: a topologia de rede (VNets/peering/firewall) não está incluída aqui. Caso precise de Hub/Spoke de rede Azure completo, criar os VNets e peerings via Terraform de rede e apontar os AKS para sub-redes específicas.
 
 Importar clusters no Rancher
@@ -58,13 +57,13 @@ Importar clusters no Rancher
   - `az aks get-credentials -g myorg-wakanda-rg -n myorg-wakanda-aks --admin --file kubeconfig_hub --overwrite-existing`
   - `az aks get-credentials -g myorg-gondor-rg  -n myorg-gondor-aks  --admin --file kubeconfig_dev --overwrite-existing`
   - `az aks get-credentials -g myorg-sokovia-rg -n myorg-sokovia-aks --admin --file kubeconfig_hmg --overwrite-existing`
-  - `az aks get-credentials -g myorg-argard-rg  -n myorg-argard-aks  --admin --file kubeconfig_prd --overwrite-existing`
-- No Rancher UI: Clusters > Create > Import Existing, crie os 4 (Wakanda/Gondor/Sokovia/Argard) e copie o comando `kubectl apply -f https://...` gerado para cada um.
+  - `az aks get-credentials -g myorg-asgard-rg  -n myorg-asgard-aks  --admin --file kubeconfig_prd --overwrite-existing`
+- No Rancher UI: Clusters > Create > Import Existing, crie os 4 (Wakanda/Gondor/Sokovia/Asgard) e copie o comando `kubectl apply -f https://...` gerado para cada um.
 - Em 4 terminais (ou sequencialmente):
   - `KUBECONFIG=$PWD/kubeconfig_hub kubectl apply -f <manifest_url_do_Wakanda>`
   - `KUBECONFIG=$PWD/kubeconfig_dev kubectl apply -f <manifest_url_do_Gondor>`
   - `KUBECONFIG=$PWD/kubeconfig_hmg kubectl apply -f <manifest_url_do_Sokovia>`
-  - `KUBECONFIG=$PWD/kubeconfig_prd kubectl apply -f <manifest_url_do_Argard>`
+  - `KUBECONFIG=$PWD/kubeconfig_prd kubectl apply -f <manifest_url_do_Asgard>`
 - Volte ao Rancher UI e aguarde ficarem Active. Se o acesso externo não estiver pronto, use port-forward para o Rancher conforme readme.
 
 Proxy
