@@ -213,22 +213,22 @@ resource "helm_release" "rancher" {
 }
 
 # Hub/Spoke clusters (infra only; no apps installed by default)
-module "hub" {
-  source             = "./modules/aks-cluster"
-  count              = var.create_env_clusters && var.enable_hub ? 1 : 0
-  name               = var.hub_name
-  prefix             = var.prefix
-  location           = var.location
-  kubernetes_version = var.kubernetes_version
-  node_count         = var.env_node_count
-  vm_size            = var.env_vm_size
-  tags = {
-    "managed-by" = "terraform"
-    "env"        = "hub"
-    "name"       = var.hub_name
-    "arch"       = "hub-spoke"
-  }
-}
+# module "hub" {
+#   source             = "./modules/aks-cluster"
+#   count              = var.create_env_clusters && var.enable_hub ? 1 : 0
+#   name               = var.hub_name
+#   prefix             = var.prefix
+#   location           = var.location
+#   kubernetes_version = var.kubernetes_version
+#   node_count         = var.env_node_count
+#   vm_size            = var.env_vm_size
+#   tags = {
+#     "managed-by" = "terraform"
+#     "env"        = "hub"
+#     "name"       = var.hub_name
+#     "arch"       = "hub-spoke"
+#   }
+# }
 
 module "dev" {
   source             = "./modules/aks-cluster"
@@ -247,36 +247,36 @@ module "dev" {
   }
 }
 
-module "hmg" {
-  source             = "./modules/aks-cluster"
-  count              = var.create_env_clusters && var.enable_hmg ? 1 : 0
-  name               = var.hmg_name
-  prefix             = var.prefix
-  location           = var.location
-  kubernetes_version = var.kubernetes_version
-  node_count         = var.env_node_count
-  vm_size            = var.env_vm_size
-  tags = {
-    "managed-by" = "terraform"
-    "env"        = "hmg"
-    "name"       = var.hmg_name
-    "arch"       = "hub-spoke"
-  }
-}
+# module "hmg" {
+#   source             = "./modules/aks-cluster"
+#   count              = var.create_env_clusters && var.enable_hmg ? 1 : 0
+#   name               = var.hmg_name
+#   prefix             = var.prefix
+#   location           = var.location
+#   kubernetes_version = var.kubernetes_version
+#   node_count         = var.env_node_count
+#   vm_size            = var.env_vm_size
+#   tags = {
+#     "managed-by" = "terraform"
+#     "env"        = "hmg"
+#     "name"       = var.hmg_name
+#     "arch"       = "hub-spoke"
+#   }
+# }
 
-module "prd" {
-  source             = "./modules/aks-cluster"
-  count              = var.create_env_clusters && var.enable_prd ? 1 : 0
-  name               = var.prd_name
-  prefix             = var.prefix
-  location           = var.location
-  kubernetes_version = var.kubernetes_version
-  node_count         = var.env_node_count
-  vm_size            = var.env_vm_size
-  tags = {
-    "managed-by" = "terraform"
-    "env"        = "prd"
-    "name"       = var.prd_name
-    "arch"       = "hub-spoke"
-  }
-}
+# module "prd" {
+#   source             = "./modules/aks-cluster"
+#   count              = var.create_env_clusters && var.enable_prd ? 1 : 0
+#   name               = var.prd_name
+#   prefix             = var.prefix
+#   location           = var.location
+#   kubernetes_version = var.kubernetes_version
+#   node_count         = var.env_node_count
+#   vm_size            = var.env_vm_size
+#   tags = {
+#     "managed-by" = "terraform"
+#     "env"        = "prd"
+#     "name"       = var.prd_name
+#     "arch"       = "hub-spoke"
+#   }
+# }

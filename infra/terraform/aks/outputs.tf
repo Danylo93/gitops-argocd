@@ -44,17 +44,17 @@ output "ingress_public_ip" {
   value       = try(data.kubernetes_service.ingress_nginx_controller[0].status[0].load_balancer[0].ingress[0].ip, null)
 }
 
-# Kubeconfigs dos clusters de ambientes (Hub/Dev/HMG/PRD)
-output "hub_cluster_name" {
-  value       = try(module.hub[0].cluster_name, null)
-  description = "Nome do cluster Hub (Wakanda)"
-}
+# Kubeconfigs dos clusters de ambientes (apenas Dev/Gondor ativo)
+# output "hub_cluster_name" {
+#   value       = try(module.hub[0].cluster_name, null)
+#   description = "Nome do cluster Hub (Wakanda)"
+# }
 
-output "hub_kubeconfig" {
-  value       = try(module.hub[0].kube_config_raw, null)
-  description = "Kubeconfig do cluster Hub (Wakanda)"
-  sensitive   = true
-}
+# output "hub_kubeconfig" {
+#   value       = try(module.hub[0].kube_config_raw, null)
+#   description = "Kubeconfig do cluster Hub (Wakanda)"
+#   sensitive   = true
+# }
 
 output "dev_cluster_name" {
   value       = try(module.dev[0].cluster_name, null)
@@ -67,24 +67,24 @@ output "dev_kubeconfig" {
   sensitive   = true
 }
 
-output "hmg_cluster_name" {
-  value       = try(module.hmg[0].cluster_name, null)
-  description = "Nome do cluster HMG (Sokovia)"
-}
+# output "hmg_cluster_name" {
+#   value       = try(module.hmg[0].cluster_name, null)
+#   description = "Nome do cluster HMG (Sokovia)"
+# }
 
-output "hmg_kubeconfig" {
-  value       = try(module.hmg[0].kube_config_raw, null)
-  description = "Kubeconfig do cluster HMG (Sokovia)"
-  sensitive   = true
-}
+# output "hmg_kubeconfig" {
+#   value       = try(module.hmg[0].kube_config_raw, null)
+#   description = "Kubeconfig do cluster HMG (Sokovia)"
+#   sensitive   = true
+# }
 
-output "prd_cluster_name" {
-  value       = try(module.prd[0].cluster_name, null)
-  description = "Nome do cluster PRD (Argard)"
-}
+# output "prd_cluster_name" {
+#   value       = try(module.prd[0].cluster_name, null)
+#   description = "Nome do cluster PRD (Asgard)"
+# }
 
-output "prd_kubeconfig" {
-  value       = try(module.prd[0].kube_config_raw, null)
-  description = "Kubeconfig do cluster PRD (Argard)"
-  sensitive   = true
-}
+# output "prd_kubeconfig" {
+#   value       = try(module.prd[0].kube_config_raw, null)
+#   description = "Kubeconfig do cluster PRD (Asgard)"
+#   sensitive   = true
+# }
