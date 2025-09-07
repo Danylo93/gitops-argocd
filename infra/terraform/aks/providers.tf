@@ -13,6 +13,10 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = ">= 1.14.0"
     }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.29.0"
+    }
   }
 }
 
@@ -20,4 +24,12 @@ provider "azurerm" {
   features {}
   # Optionally set via -var subscription_id or TF_VAR_subscription_id
   subscription_id = "b171271a-b25e-45aa-ad46-f48535580096"
+}
+
+provider "kubernetes" {
+  alias                  = "argocd"
+  host                   = module.argocd.kube_host
+  client_certificate     = base64decode(module.argocd.kube_client_certificate)
+  client_key             = base64decode(module.argocd.kube_client_key)
+  cluster_ca_certificate = base64decode(module.argocd.kube_cluster_ca_certificate)
 }

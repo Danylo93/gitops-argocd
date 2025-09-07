@@ -8,12 +8,12 @@ Acesso Local (atalhos)
 
 - ArgoCD
   - Senha inicial: `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo`
-  - Port-forward: `kubectl -n argocd port-forward svc/argocd-server 8080:443`
-  - URL: https://localhost:8080 (usuário: admin)
+  - URL (DNS): https://argocd.quantum-flow.tech (usuário: admin)
+  - (alternativa local) Port-forward: `kubectl -n argocd port-forward svc/argocd-server 8080:443` => https://localhost:8080
 
 - Rancher (se instalado)
-  - Port-forward: `kubectl -n cattle-system port-forward svc/rancher 8443:443`
-  - URL: https://localhost:8443 (usuário: admin)
+  - URL (DNS): https://rancher.quantum-flow.tech
+  - (alternativa local) Port-forward: `kubectl -n cattle-system port-forward svc/rancher 8443:443` => https://localhost:8443
   - Senha bootstrap: `kubectl -n cattle-system get secret bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{"\n"}}'`
 
 Instalar Rancher via Helm (opcional)
@@ -50,3 +50,4 @@ Rede/Proxy (Helm no Terraform)
 Notas
 
 - Evite manter senhas em arquivos; sempre recupere via `kubectl` conforme exemplos.
+- Modo free tier: veja `docs/aks.md` para comandos prontos (gestão, +1 ambiente, +4 ambientes com 1 nó cada) e dicas de quota.

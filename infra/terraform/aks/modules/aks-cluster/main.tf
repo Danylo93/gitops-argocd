@@ -24,6 +24,13 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 
   tags = var.tags
+
+  lifecycle {
+    # Evita atualizações não intencionais no node pool padrão, especialmente logo após import
+    ignore_changes = [
+      default_node_pool,
+    ]
+  }
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "kafka" {

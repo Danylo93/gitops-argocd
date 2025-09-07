@@ -17,6 +17,7 @@ locals {
 }
 
 resource "kubectl_manifest" "eck_operator_app" {
+  count     = var.install_argocd ? 1 : 0
   provider  = kubectl.argocd
   yaml_body = local.eck_operator_app
   wait      = true
@@ -27,6 +28,7 @@ resource "kubectl_manifest" "eck_operator_app" {
 }
 
 resource "kubectl_manifest" "eck_stack_app" {
+  count     = var.install_argocd ? 1 : 0
   provider  = kubectl.argocd
   yaml_body = local.eck_stack_app
   wait      = true
