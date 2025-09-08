@@ -1,8 +1,9 @@
 Guia do Repositório
 
 - docs/aks.md — Provisionamento AKS + ArgoCD (Terraform)
-- docs/eck-iac.md — ECK (Operator + Stack) via ArgoCD (Terraform)
+- docs/eck-iac.md — ECK e Strimzi via ArgoCD (Terraform)
 - docs/apps-gitops.md — Como adicionar apps (Kustomize + ArgoCD)
+- docs/postgres-iac.md — Postgres via ArgoCD (Terraform)
 
 Acesso Local (atalhos)
 

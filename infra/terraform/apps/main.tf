@@ -38,6 +38,16 @@ locals {
       kafka_namespace  = var.kafka_namespace
     }
   )
+
+  postgres_app = templatefile(
+    "${path.module}/templates/postgres.yaml.tpl",
+    {
+      repo_url         = var.argocd_app_repo_url,
+      target_revision  = var.argocd_app_target_revision,
+      argocd_namespace = var.argocd_namespace,
+      postgres_namespace = var.postgres_namespace,
+    }
+  )
 }
 
 resource "kubectl_manifest" "eck_operator_app" {
@@ -61,3 +71,9 @@ resource "kubectl_manifest" "strimzi_kafka_app" {
   wait      = true
   depends_on = [kubectl_manifest.strimzi_operator_app]
 }
+
+resource "kubectl_manifest" "postgres_app" {
+  yaml_body = local.postgres_app
+  wait      = true
+}
+

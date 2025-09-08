@@ -8,7 +8,7 @@ Provisionar
 
 - `cd infra/terraform/aks`
 - `terraform init`
-- Free tier (padrão ajustado): `terraform apply -var prefix="myorg" -var location="eastus"`
+- Free tier (padrão ajustado): `terraform apply -var prefix="agencia-infra" -var location="eastus"`
 - Kubeconfig: `terraform output -raw argocd_kubeconfig > kubeconfig_argocd`
   - Linux/macOS: `export KUBECONFIG=$PWD/kubeconfig_argocd`
   - PowerShell: `$env:KUBECONFIG=(Get-Location).Path+"\kubeconfig_argocd"`
@@ -54,10 +54,10 @@ Hub/Spoke (Múltiplos clusters)
 Importar clusters no Rancher
 
 - Gere os kubeconfigs (sensíveis). Se os outputs estiverem nulos, use az CLI:
-  - `az aks get-credentials -g myorg-wakanda-rg -n myorg-wakanda-aks --admin --file kubeconfig_hub --overwrite-existing`
-  - `az aks get-credentials -g myorg-gondor-rg  -n myorg-gondor-aks  --admin --file kubeconfig_dev --overwrite-existing`
-  - `az aks get-credentials -g myorg-sokovia-rg -n myorg-sokovia-aks --admin --file kubeconfig_hmg --overwrite-existing`
-  - `az aks get-credentials -g myorg-asgard-rg  -n myorg-asgard-aks  --admin --file kubeconfig_prd --overwrite-existing`
+  - `az aks get-credentials -g agencia-infra-wakanda-rg -n agencia-infra-wakanda-aks --admin --file kubeconfig_hub --overwrite-existing`
+  - `az aks get-credentials -g agencia-infra-gondor-rg  -n agencia-infra-gondor-aks  --admin --file kubeconfig_dev --overwrite-existing`
+  - `az aks get-credentials -g agencia-infra-sokovia-rg -n agencia-infra-sokovia-aks --admin --file kubeconfig_hmg --overwrite-existing`
+  - `az aks get-credentials -g agencia-infra-asgard-rg  -n agencia-infra-asgard-aks  --admin --file kubeconfig_prd --overwrite-existing`
 - No Rancher UI: Clusters > Create > Import Existing, crie os 4 (Wakanda/Gondor/Sokovia/Asgard) e copie o comando `kubectl apply -f https://...` gerado para cada um.
 - Em 4 terminais (ou sequencialmente):
   - `KUBECONFIG=$PWD/kubeconfig_hub kubectl apply -f <manifest_url_do_Wakanda>`
@@ -80,15 +80,15 @@ Free tier: dicas rápidas
 Comandos prontos (free tier)
 
 - Somente gestão (Argocd/Rancher via port-forward):
-  - `terraform apply -var prefix="myorg" -var location="eastus"`
+  - `terraform apply -var prefix="agencia-infra" -var location="eastus"`
 
 - Gestão + 1 ambiente (ex.: Hub/Wakanda):
-  - `terraform apply -var prefix="myorg" -var location="eastus" \
+  - `terraform apply -var prefix="agencia-infra" -var location="eastus" \
      -var create_env_clusters=true -var enable_hub=true -var enable_dev=false -var enable_hmg=false -var enable_prd=false \
      -var argocd_node_count=1 -var env_node_count=1 -var argocd_vm_size=Standard_B2s -var env_vm_size=Standard_B2s`
 
 - Gestão + todos os 4 ambientes (1 nó cada):
-  - `terraform apply -var prefix="myorg" -var location="eastus" \
+  - `terraform apply -var prefix="agencia-infra" -var location="eastus" \
      -var create_env_clusters=true -var enable_hub=true -var enable_dev=true -var enable_hmg=true -var enable_prd=true \
      -var argocd_node_count=1 -var env_node_count=1 -var argocd_vm_size=Standard_B2s -var env_vm_size=Standard_B2s`
 
@@ -97,18 +97,3 @@ Comandos prontos (free tier)
   - Para liberar vCPU temporariamente: `az aks stop -g <rg> -n <aks>` e `az aks start -g <rg> -n <aks>`.
 
 
-
-curl -k -u "token-z55c5:lxh2cklvs4b2sq4ms4lbrm4qqs5rbf929c7hfqnmhdkggzksqcsbsn" -X DELETE "https://rancher.quantum-flow.tech/v3/clusters/asgard"
-
-# escolha UM dos repositórios e dê esse alias
-helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
-helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
-helm repo add rancher-prerelease https://releases.rancher.com/server-charts/prerelease
-helm repo update
-
-
-# Ex.: usando o estável
-helm install rancher rancher-stable/rancher \
-  --namespace cattle-system --create-namespace \
-  --set hostname=rancher.quantum-flow.tech \
-  --set bootstrapPassword=admin

@@ -33,6 +33,12 @@ variable "kafka_namespace" {
   default     = "kafka"
 }
 
+variable "postgres_namespace" {
+  description = "Namespace do banco Postgres"
+  type        = string
+  default     = "postgres"
+}
+
 variable "strimzi_chart_version" {
   description = "Versão do chart Helm do Strimzi Operator"
   type        = string
