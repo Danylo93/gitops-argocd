@@ -120,7 +120,7 @@ variable "kafka_node_taints" {
 variable "argocd_app_repo_url" {
   description = "Git repo URL usado pelos Applications do ArgoCD"
   type        = string
-  default     = "https://github.com/Danylo93/gitops-argocd.git"
+  default     = "https://github.com/Danylo93/agencia-infra-aks.git"
 }
 
 variable "argocd_app_target_revision" {

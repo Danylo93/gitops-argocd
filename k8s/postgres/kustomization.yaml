@@ -1,0 +1,5 @@
+namespace: postgres
+resources:
+  - namespace.yaml
+  - postgres.yaml
+  - service.yaml
