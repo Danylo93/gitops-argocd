@@ -56,16 +56,16 @@ output "ingress_public_ip" {
 #   sensitive   = true
 # }
 
-output "dev_cluster_name" {
-  value       = try(module.dev[0].cluster_name, null)
-  description = "Nome do cluster Dev (Gondor)"
-}
+# output "dev_cluster_name" {
+#   value       = try(module.dev[0].cluster_name, null)
+#   description = "Nome do cluster Dev (Gondor)"
+# }
 
-output "dev_kubeconfig" {
-  value       = try(module.dev[0].kube_config_raw, null)
-  description = "Kubeconfig do cluster Dev (Gondor)"
-  sensitive   = true
-}
+# output "dev_kubeconfig" {
+#   value       = try(module.dev[0].kube_config_raw, null)
+#   description = "Kubeconfig do cluster Dev (Gondor)"
+#   sensitive   = true
+# }
 
 # output "hmg_cluster_name" {
 #   value       = try(module.hmg[0].cluster_name, null)

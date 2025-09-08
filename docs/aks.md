@@ -99,3 +99,16 @@ Comandos prontos (free tier)
 
 
 curl -k -u "token-z55c5:lxh2cklvs4b2sq4ms4lbrm4qqs5rbf929c7hfqnmhdkggzksqcsbsn" -X DELETE "https://rancher.quantum-flow.tech/v3/clusters/asgard"
+
+# escolha UM dos repositórios e dê esse alias
+helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+helm repo add rancher-prerelease https://releases.rancher.com/server-charts/prerelease
+helm repo update
+
+
+# Ex.: usando o estável
+helm install rancher rancher-stable/rancher \
+  --namespace cattle-system --create-namespace \
+  --set hostname=rancher.quantum-flow.tech \
+  --set bootstrapPassword=admin

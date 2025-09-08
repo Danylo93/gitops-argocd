@@ -244,7 +244,7 @@ variable "enable_hub" {
 variable "enable_dev" {
   description = "Criar cluster Dev (Gondor)"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "enable_hmg" {
